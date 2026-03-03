@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_IMAGE = 'discoverdevops/my-app:latest'
+        DOCKER_IMAGE = 'avs77/my-app:latest'
         GIT_REPO = 'https://github.com/aayushsatpute402/JenkinsDemo.git'
     }
 
