@@ -1,14 +1,13 @@
 pipeline {
-    agent {
-        label 'SlaveA'  // Replace with your worker node's label
-    }
+    agent any
     
     environment {
         DOCKER_IMAGE = 'discoverdevops/my-app:latest'
-        GIT_REPO = 'https://github.com/discover-devops/JenkinsDemo.git'
+        GIT_REPO = 'https://github.com/aayushsatpute402/JenkinsDemo.git'
     }
 
     stages {
+
         stage('Clone Source Code') {
             steps {
                 git branch: 'main', url: "${GIT_REPO}"
@@ -35,13 +34,11 @@ pipeline {
 
         stage('Deploy Application') {
             steps {
-                script {
-                    sh """
-                    docker stop my-app || true
-                    docker rm my-app || true
-                    docker run -d --name my-app -p 5000:5000 ${DOCKER_IMAGE}
-                    """
-                }
+                sh '''
+                docker stop my-app || true
+                docker rm my-app || true
+                docker run -d --name my-app -p 5000:5000 ${DOCKER_IMAGE}
+                '''
             }
         }
     }
